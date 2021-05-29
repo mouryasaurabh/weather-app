@@ -31,12 +31,14 @@ class MainActivity : AppCompatActivity() {
                 response: Response<WeatherModel?>
             ) {
                 response.body()
+                println("onResponse")
             }
 
             override fun onFailure(
                 call: Call<WeatherModel?>,
                 t: Throwable
             ) {
+                println("onFailure")
             }
         })
 
