@@ -1,4 +1,4 @@
-package com.service.weatherapp.models
+package com.service.weatherapp.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,7 +17,6 @@ data class WeatherModel(
     @SerializedName("name") var name: String? = null,
     @SerializedName("cod") var cod: Int? = null
 )
-
 
 data class CoordItemModel(
     @SerializedName("lon") var lon: Double? = null,
