@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "RecentCity")
 data class City(
-    @PrimaryKey val city_id: Int,
-    @ColumnInfo(name = "city_name") val cityName: String?
+    @PrimaryKey @ColumnInfo(name = "city_id") val cityId: Int,
+    @ColumnInfo(name = "city_name") val cityName: String
 )
