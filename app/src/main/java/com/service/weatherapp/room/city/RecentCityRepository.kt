@@ -14,7 +14,7 @@ class RecentCityRepository(context: Context) {
     }
 
     fun insertCity(city: City) {
-        db.insert(city.cityId, city.cityName)
+        db.insert(city.city_id, city.city_name)
     }
 
     fun deleteCity(city: City) {

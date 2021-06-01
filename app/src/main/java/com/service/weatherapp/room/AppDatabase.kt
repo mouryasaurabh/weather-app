@@ -45,8 +45,12 @@ abstract class AppDatabase : RoomDatabase() {
     class MIGRATION_1_2 : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
             database.execSQL(
-                "CREATE TABLE `RecentCity` (`id` INTEGER, "
-                        + "`name` TEXT, PRIMARY KEY(`id`))"
+                "CREATE TABLE `RecentCity` (`city_id` INTEGER, "
+                        + "`city_name` TEXT, PRIMARY KEY(`city_id`))"
+            )
+            database.execSQL(
+                "CREATE TABLE `WeatherDetails` (`city_id` INTEGER, "
+                        +" PRIMARY KEY(`city_id`))"
             )
         }
     }
