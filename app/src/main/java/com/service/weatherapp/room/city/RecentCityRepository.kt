@@ -9,16 +9,16 @@ class RecentCityRepository(context: Context) {
         context
     )?.cityDao()!!
 
-    fun getAllRecentCities(): List<City>? {
-        return /*db.getAllRecentCities()*/null
+    fun insertCity(cityEntity: CityEntity): Long {
+        return db.insert(cityEntity)
     }
 
-    fun insertCity(city: City) {
-        db.insert(city.city_id, city.city_name)
+    fun deleteCity(city_id: Int) {
+        db.delete(city_id)
     }
 
-    fun deleteCity(city: City) {
-        db.delete(city)
+    fun getAllCities(): List<CityEntity> {
+        return db.getAllCities()
     }
 
 }

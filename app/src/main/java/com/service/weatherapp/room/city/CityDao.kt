@@ -1,18 +1,17 @@
 package com.service.weatherapp.room.city
 
 import androidx.room.*
-import com.service.weatherapp.room.DataConverter
 
 @Dao
 interface CityDao {
 
-//    @Query("SELECT * FROM RecentCity")
-//    @TypeConverters(DataConverter::class)
-//    fun getAllRecentCities(): List<City>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(cityEntity: CityEntity): Long
 
-    @Query("UPDATE RecentCity SET city_id = :id, city_name = :name where city_id = :id")
-    fun insert(id: Int, name: String)
+    @Query("DELETE FROM RecentCity WHERE city_id = :city_id")
+    fun delete(city_id: Int)
 
-    @Delete
-    fun delete(city: City)
+    @Query("SELECT * FROM RecentCity")
+    fun getAllCities(): List<CityEntity>
+
 }

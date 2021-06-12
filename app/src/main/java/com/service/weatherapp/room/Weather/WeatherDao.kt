@@ -1,17 +1,21 @@
 package com.service.weatherapp.room.city
 
-import androidx.room.Dao
-import androidx.room.Delete
+import androidx.room.*
+import com.service.weatherapp.model.WeatherDataEntity
 
 @Dao
 interface WeatherDao {
 
-    /*@Insert
-    fun insertWeatherForCity(cityId: Int, weatherModel: WeatherModel)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(weatherDataEntity: WeatherDataEntity): Long
 
-    @Insert
-    fun updateCityWeather(cityId: Int, weatherModel: WeatherModel)
+    @Query("DELETE FROM WeatherDetails WHERE id = :city_id")
+    fun delete(city_id: Int)
 
-    @Delete
-    fun deleteCityWeather(cityId: Int)*/
+    @Query("SELECT * FROM WeatherDetails WHERE id = :city_id")
+    fun getCityWeatherDetails(city_id: Int): WeatherDataEntity
+
+    @Query("SELECT * FROM WeatherDetails")
+    fun getAllCityWeatherDetails(): List<WeatherDataEntity>
+
 }

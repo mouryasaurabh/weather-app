@@ -16,7 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class RecentFavouriteViewModel : ViewModel() {
 
     fun insertCity() {
         GlobalScope.launch(Dispatchers.IO) {

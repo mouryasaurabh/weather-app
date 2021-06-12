@@ -5,15 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.service.weatherapp.room.city.City
+import com.service.weatherapp.model.WeatherDataEntity
+import com.service.weatherapp.room.city.CityEntity
 import com.service.weatherapp.room.city.CityDao
 import com.service.weatherapp.room.city.WeatherDao
-import com.service.weatherapp.room.city.WeatherEntity
 
-
-@Database(entities = [City::class, WeatherEntity::class], version = 2, exportSchema = false)
+@Database(entities = [CityEntity::class, WeatherDataEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DataConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
@@ -30,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java, "weather.db"
-                    ).addMigrations(MIGRATION_1_2()).allowMainThreadQueries()
+                    ).allowMainThreadQueries()
                         .build()
                 }
             }
@@ -39,19 +36,6 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun destroyInstance() {
             INSTANCE = null
-        }
-    }
-
-    class MIGRATION_1_2 : Migration(1, 2) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL(
-                "CREATE TABLE `RecentCity` (`city_id` INTEGER, "
-                        + "`city_name` TEXT, PRIMARY KEY(`city_id`))"
-            )
-            database.execSQL(
-                "CREATE TABLE `WeatherDetails` (`city_id` INTEGER, "
-                        +" PRIMARY KEY(`city_id`))"
-            )
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.service.weatherapp.room.city
 
 import android.content.Context
-import com.service.weatherapp.model.WeatherModel
+import com.service.weatherapp.model.WeatherDataEntity
 import com.service.weatherapp.room.AppDatabase
 
 class WeatherRepository(context: Context) {
@@ -10,16 +10,20 @@ class WeatherRepository(context: Context) {
         context
     )?.weatherDao()!!
 
-   /* fun insertWeatherForCity(cityId: Int, weatherModel: WeatherModel) {
-        return db.insertWeatherForCity(cityId, weatherModel)
-    }
-
-    fun updateCityWeather(cityId: Int, weatherModel: WeatherModel) {
-        return db.updateCityWeather(cityId, weatherModel)
+    fun insertWeatherForCity(weatherDataEntity: WeatherDataEntity): Long {
+        return db.insert(weatherDataEntity)
     }
 
     fun deleteCityWeather(cityId: Int) {
-        return db.deleteCityWeather(cityId)
-    }*/
+        return db.delete(cityId)
+    }
+
+    fun getCityWeatherDetails(cityId: Int): WeatherDataEntity {
+        return db.getCityWeatherDetails(cityId)
+    }
+
+    fun getAllCityWeatherDetails(): List<WeatherDataEntity> {
+        return db.getAllCityWeatherDetails()
+    }
 
 }
