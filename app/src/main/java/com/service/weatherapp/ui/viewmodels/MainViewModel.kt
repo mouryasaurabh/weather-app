@@ -9,7 +9,11 @@ import com.service.weatherapp.R
 import com.service.weatherapp.model.WeatherDataEntity
 import com.service.weatherapp.retrofit.RetrofitClientInstance
 import com.service.weatherapp.retrofit.RetrofitDataService
+import com.service.weatherapp.room.recentcity.WeatherRepository
 import com.service.weatherapp.util.AppUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,14 +22,14 @@ class MainViewModel : ViewModel() {
     @SuppressLint("StaticFieldLeak")
     var appContext = MyApplication.appContext!!
 
-    val service =
-        RetrofitClientInstance.retrofitInstance?.create(
-            RetrofitDataService::class.java
-        )
+    val service = RetrofitClientInstance.retrofitInstance?.create(RetrofitDataService::class.java)
+
+    private val weatherRepo = WeatherRepository(MyApplication.appContext!!)
 
     private val loaderLiveData = MutableLiveData<Boolean>()
-    private val weatherResponseLiveData = MutableLiveData<WeatherDataEntity>()
     fun getLoaderLiveData() = loaderLiveData
+
+    private val weatherResponseLiveData = MutableLiveData<WeatherDataEntity>()
     fun getWeatherResponseLiveData() = weatherResponseLiveData
 
     fun searchCity(cityName: String?) {
@@ -75,6 +79,10 @@ class MainViewModel : ViewModel() {
             ).show()
             return
         }
-        weatherResponseLiveData.value = response.body()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            weatherRepo.insertWeatherForCity(response.body()!!)
+            weatherResponseLiveData.postValue(response.body())
+        }
     }
 }

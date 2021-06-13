@@ -22,21 +22,39 @@ open class BaseActivity : AppCompatActivity() {
             .commit()
     }
 
+    fun replaceFragmentWithOutBackStack(
+        @IdRes containerViewId: Int,
+        fragment: Fragment,
+        fragmentTag: String
+    ) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(containerViewId, fragment, fragmentTag)
+
+            .commit()
+    }
+
     fun replaceFragment(
         @IdRes containerViewId: Int,
         fragment: Fragment,
         fragmentTag: String,
         @Nullable backStackStateName: String?
     ) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(containerViewId, fragment, fragmentTag)
-            .addToBackStack(backStackStateName)
-            .commit()
+        backStackStateName?.let {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(containerViewId, fragment, fragmentTag)
+                .addToBackStack(backStackStateName)
+                .commit()
+        } ?: kotlin.run {
+            replaceFragmentWithOutBackStack(containerViewId, fragment, fragmentTag)
+        }
     }
 
     override fun onBackPressed() {
-        supportFragmentManager.fragments[supportFragmentManager.backStackEntryCount - 1].onResume()
+        if (supportFragmentManager.backStackEntryCount - 1 >= 0) {
+            supportFragmentManager.fragments[supportFragmentManager.backStackEntryCount - 1].onResume()
+        }
         super.onBackPressed()
     }
 }

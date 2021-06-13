@@ -7,6 +7,6 @@ import java.io.Serializable
 
 @Entity(tableName = "RecentCity")
 data class CityEntity(
-    @PrimaryKey @ColumnInfo(name = "city_id") val city_id: Int,
+    @PrimaryKey @ColumnInfo(name = "city_id") val city_id: Long,
     @ColumnInfo(name = "city_name") val city_name: String
 ) : Serializable

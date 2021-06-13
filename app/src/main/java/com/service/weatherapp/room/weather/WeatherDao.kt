@@ -10,10 +10,10 @@ interface WeatherDao {
     fun insert(weatherDataEntity: WeatherDataEntity): Long
 
     @Query("DELETE FROM WeatherDetails WHERE id = :city_id")
-    fun delete(city_id: Int)
+    fun delete(city_id: Long)
 
     @Query("SELECT * FROM WeatherDetails WHERE id = :city_id")
-    fun getCityWeatherDetails(city_id: Int): WeatherDataEntity
+    fun getCityWeatherDetails(city_id: Long): WeatherDataEntity
 
     @Query("SELECT * FROM WeatherDetails")
     fun getAllCityWeatherDetails(): List<WeatherDataEntity>

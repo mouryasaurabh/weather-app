@@ -14,11 +14,11 @@ class WeatherRepository(context: Context) {
         return db.insert(weatherDataEntity)
     }
 
-    fun deleteCityWeather(cityId: Int) {
+    fun deleteCityWeather(cityId: Long) {
         return db.delete(cityId)
     }
 
-    fun getCityWeatherDetails(cityId: Int): WeatherDataEntity {
+    fun getCityWeatherDetails(cityId: Long): WeatherDataEntity {
         return db.getCityWeatherDetails(cityId)
     }
 

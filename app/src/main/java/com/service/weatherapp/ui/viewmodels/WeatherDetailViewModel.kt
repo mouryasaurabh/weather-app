@@ -1,50 +1,57 @@
 package com.service.weatherapp.ui.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.service.weatherapp.MyApplication
 import com.service.weatherapp.model.WeatherDataEntity
 import com.service.weatherapp.room.recentcity.CityEntity
 import com.service.weatherapp.room.recentcity.RecentCityRepository
 import com.service.weatherapp.room.recentcity.WeatherRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class WeatherDetailViewModel : ViewModel() {
 
-    fun insertCity() {
-        GlobalScope.launch(Dispatchers.IO) {
-            RecentCityRepository(
-                MyApplication.appContext!!
-            ).insertCity(
-                CityEntity(
-                    10,
-                    "Delhi"
+    private val weatherRepo = WeatherRepository(MyApplication.appContext!!)
+    private val recentCityRepo = RecentCityRepository(MyApplication.appContext!!)
+
+    private var weatherLiveData = MutableLiveData<WeatherDataEntity>()
+    fun getWeatherLiveData() = weatherLiveData
+    private var favouriteLiveData = MutableLiveData<Boolean>()
+    fun getFavouriteLiveData() = favouriteLiveData
+
+    fun checkIfCityIsFavourite(citId: Long) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val count = recentCityRepo.checkIfCityExists(citId)
+            if (count >= 1) {
+                favouriteLiveData.postValue(true)
+            }else{
+                favouriteLiveData.postValue(false)
+            }
+        }
+    }
+
+    fun fetchWeatherDetailByCityId(cityid: Long) {
+        CoroutineScope(Dispatchers.IO).launch {
+            weatherLiveData.postValue(
+                weatherRepo.getCityWeatherDetails(
+                    cityid
                 )
             )
         }
+    }
 
-       /* GlobalScope.launch(Dispatchers.IO) {
-            val cities = RecentCityRepository(
-                MyApplication.appContext!!
-            ).getAllCities(
-            )
-            println("xxxxx: City count:${cities.size}")
-            for (cityEntity: CityEntity in cities) {
-                println("xxxxx: Iterate City:${cityEntity.city_id}, ${cityEntity.city_name}")
-            }
-        }*/
+    fun saveRecentCity(cityEntity: CityEntity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            recentCityRepo.insertCity(cityEntity)
+        }
+    }
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val weathers= WeatherRepository(
-                    MyApplication.appContext!!
-                ).getAllCityWeatherDetails(
-                )
-            println("xxxxx: Weather count:${weathers.size}")
-            for (weather: WeatherDataEntity in weathers) {
-                println("xxxxx: Iterate WeatherDataEntity: ${weather.id}, ${weather.name}, ${weather.dt},")
-            }
-            }
+    fun removeRecent(id: Long) {
+        CoroutineScope(Dispatchers.IO).launch {
+            recentCityRepo.deleteCity(id)
+        }
     }
 
 }

@@ -9,11 +9,15 @@ class RecentCityRepository(context: Context) {
         context
     )?.cityDao()!!
 
+    fun checkIfCityExists(city_id: Long): Long {
+        return db.checkIfCityExists(city_id)
+    }
+
     fun insertCity(cityEntity: CityEntity): Long {
         return db.insert(cityEntity)
     }
 
-    fun deleteCity(city_id: Int) {
+    fun deleteCity(city_id: Long) {
         db.delete(city_id)
     }
 

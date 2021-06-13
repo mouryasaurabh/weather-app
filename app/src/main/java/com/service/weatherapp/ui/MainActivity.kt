@@ -51,7 +51,7 @@ class MainActivity : BaseActivity(), RecentCityItemClickListener {
             weatherData?.let {
                 replaceFragment(
                     R.id.fragment_container_view,
-                    WeatherDetailFragment.newInstance(weatherDataEntity = weatherData),
+                    WeatherDetailFragment.newInstance(weatherData.id!!),
                     WeatherDetailFragment.TAG,
                     WeatherDetailFragment.TAG
                 )
@@ -68,7 +68,7 @@ class MainActivity : BaseActivity(), RecentCityItemClickListener {
     override fun onItemClick(cityEntity: CityEntity?) {
         replaceFragment(
             R.id.fragment_container_view,
-            WeatherDetailFragment.newInstance(cityEntity = cityEntity),
+            WeatherDetailFragment.newInstance(cityEntity?.city_id!!),
             WeatherDetailFragment.TAG,
             WeatherDetailFragment.TAG
         )

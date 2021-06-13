@@ -10,14 +10,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecentFavouriteViewModel : ViewModel() {
+    private val recentCityRepository = RecentCityRepository(MyApplication.appContext!!)
+
     private var cityLiveData = MutableLiveData<List<CityEntity>>()
     fun getCityLiveData() = cityLiveData
 
     fun fetchFavouriteCities() {
         CoroutineScope(Dispatchers.Main).launch {
-            cityLiveData.value = RecentCityRepository(
-                MyApplication.appContext!!
-            ).getAllCities(
+            cityLiveData.value = recentCityRepository.getAllCities(
             )
         }
     }
