@@ -5,6 +5,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ *This is a singleton class to fetch retorfit instance that can be used across project
+ */
 object RetrofitClientInstance {
     private var retrofit: Retrofit? = null
     private const val BASE_URL = "https://api.openweathermap.org"

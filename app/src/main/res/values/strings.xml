@@ -1,20 +1,23 @@
 <resources>
     <string name="app_name">Weather App</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="recent_fragment_label">RecentFavouriteFragment</string>
+    <string name="weather_fragment_label">WeatherDetailFragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="favourite_destinations">Your Favourites Destinations</string>
     <string name="search_hint">Search City</string>
     <string name="search">Search</string>
     <string name="app_title">My Weather App</string>
-    <string name="save_favourite">Save</string>
-    <string name="delete_favourite">Delete</string>
+    <string name="save_favourite">Save Fav</string>
+    <string name="delete_favourite">Delete Fav</string>
+    <string name="no_saved_city">No saved favourite city</string>
+    <string name="empty_city_name">City Name cannot be empty</string>
+    <string name="no_internet">Please connect to the internet</string>
+    <string name="something_went_wrong">Something went wrong. Please try again</string>
+    <string name="city_not_found">City not found. Please check city name.</string>
 
 </resources>

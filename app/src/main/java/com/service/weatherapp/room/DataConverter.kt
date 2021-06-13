@@ -6,6 +6,9 @@ import com.google.gson.reflect.TypeToken
 import com.service.weatherapp.model.WeatherDataEntity
 import com.service.weatherapp.model.WeatherItemModel
 
+/**
+ *This is a converter class to support serialization dn deserialization in room
+ */
 class DataConverter {
 
     @TypeConverter

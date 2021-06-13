@@ -3,6 +3,7 @@ package com.service.weatherapp.model
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import com.service.weatherapp.room.DataConverter
+import java.io.Serializable
 
 @Entity(tableName = "WeatherDetails")
 data class WeatherDataEntity(
@@ -46,7 +47,7 @@ data class WeatherDataEntity(
 
     @ColumnInfo(name = "cod")
     @SerializedName("cod") var cod: Int? = null
-)
+) : Serializable
 
 data class CoordItemModel(
     @ColumnInfo(name = "coord_item_lon")
@@ -54,7 +55,7 @@ data class CoordItemModel(
 
     @ColumnInfo(name = "coord_item_lat")
     @SerializedName("lat") var lat: Double? = null
-)
+) : Serializable
 
 data class WeatherItemModel(
     @ColumnInfo(name = "weather_item_id")
@@ -68,7 +69,7 @@ data class WeatherItemModel(
 
     @ColumnInfo(name = "weather_item_icon")
     @SerializedName("icon") var icon: String? = null
-)
+) : Serializable
 
 data class MainItemModel(
     @ColumnInfo(name = "main_item_temp")
@@ -88,7 +89,7 @@ data class MainItemModel(
 
     @ColumnInfo(name = "main_item_humidity")
     @SerializedName("humidity") var humidity: Int? = null
-)
+) : Serializable
 
 data class WindItemModel(
     @ColumnInfo(name = "wind_item_speed")
@@ -96,12 +97,12 @@ data class WindItemModel(
 
     @ColumnInfo(name = "wind_item_deg")
     @SerializedName("deg") var deg: Int? = null
-)
+) : Serializable
 
 data class CloudsItemModel(
     @ColumnInfo(name = "coulds_item_type")
     @SerializedName("all") var all: Int? = null
-)
+) : Serializable
 
 data class SysItemModel(
     @ColumnInfo(name = "sys_item_type")
@@ -118,4 +119,4 @@ data class SysItemModel(
 
     @ColumnInfo(name = "sys_item_sunset")
     @SerializedName("sunset") var sunset: Int? = null
-)
+) : Serializable

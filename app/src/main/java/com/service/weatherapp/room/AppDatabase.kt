@@ -6,9 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.service.weatherapp.model.WeatherDataEntity
-import com.service.weatherapp.room.city.CityEntity
-import com.service.weatherapp.room.city.CityDao
-import com.service.weatherapp.room.city.WeatherDao
+import com.service.weatherapp.room.recentcity.CityEntity
+import com.service.weatherapp.room.recentcity.CityDao
+import com.service.weatherapp.room.recentcity.WeatherDao
 
 @Database(entities = [CityEntity::class, WeatherDataEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DataConverter::class)

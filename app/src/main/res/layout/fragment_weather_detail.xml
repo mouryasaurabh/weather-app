@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="4dp"
-    tools:context=".ui.WeatherDetailFragment">
+    android:background="@color/orange_33"
+    tools:context=".ui.fragments.WeatherDetailFragment">
 
     <TextView
         android:id="@+id/city_details"
@@ -20,7 +21,7 @@
         tools:text="Ajmer, IN(43.4, 27.5)" />
 
     <TextView
-        android:id="@+id/favourite"
+        android:id="@+id/mark_favourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"

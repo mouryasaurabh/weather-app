@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.service.weatherapp.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.service.weatherapp.ui.fragments.RecentFavouriteFragment"
+        android:label="@string/recent_fragment_label"
+        tools:layout="@layout/fragment_recent_favourite">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.service.weatherapp.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:name="com.service.weatherapp.ui.fragments.WeatherDetailFragment"
+        android:label="@string/weather_fragment_label"
+        tools:layout="@layout/fragment_weather_detail">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

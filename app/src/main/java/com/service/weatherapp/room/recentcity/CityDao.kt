@@ -1,4 +1,4 @@
-package com.service.weatherapp.room.city
+package com.service.weatherapp.room.recentcity
 
 import androidx.room.*
 
