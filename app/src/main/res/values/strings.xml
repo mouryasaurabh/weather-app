@@ -20,4 +20,17 @@
     <string name="something_went_wrong">Something went wrong. Please try again</string>
     <string name="city_not_found">City not found. Please check city name.</string>
 
+    <string name="city_details">%s, %s(%s, %s)</string>
+    <string name="weather_details">Weather:: %s(%s)</string>
+    <string name="temperature_details">Temperature:: %s</string>
+    <string name="temperature_min">Min : %s</string>
+    <string name="temperature_max">Max: %s</string>
+    <string name="wind_details">Wind at %s km/h, %s degrees</string>
+    <string name="pressure">Pressure: %s</string>
+    <string name="humidity">Humidity: %s</string>
+    <string name="sunrise">Sunrise: %s</string>
+    <string name="sunset">Sunset: %s</string>
+    <string name="last_updated">Last Updated: %s</string>
+
+
 </resources>

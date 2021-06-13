@@ -79,7 +79,7 @@ data class MainItemModel(
     @SerializedName("feels_like") var feels_like: Double? = null,
 
     @ColumnInfo(name = "main_item_temp_min")
-    @SerializedName("temp_min") var description: Double? = null,
+    @SerializedName("temp_min") var temp_min: Double? = null,
 
     @ColumnInfo(name = "main_item_temp_max")
     @SerializedName("temp_max") var temp_max: Double? = null,
@@ -118,5 +118,5 @@ data class SysItemModel(
     @SerializedName("sunrise") var sunrise: Long? = null,
 
     @ColumnInfo(name = "sys_item_sunset")
-    @SerializedName("sunset") var sunset: Int? = null
+    @SerializedName("sunset") var sunset: Long? = null
 ) : Serializable

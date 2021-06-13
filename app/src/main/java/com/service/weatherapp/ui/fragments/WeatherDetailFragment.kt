@@ -12,7 +12,7 @@ import com.service.weatherapp.R
 import com.service.weatherapp.model.WeatherDataEntity
 import com.service.weatherapp.room.recentcity.CityEntity
 import com.service.weatherapp.ui.viewmodels.WeatherDetailViewModel
-import org.w3c.dom.Text
+import com.service.weatherapp.util.AppUtil
 
 class WeatherDetailFragment : Fragment() {
     private var weatherDataEntity: WeatherDataEntity? = null
@@ -20,8 +20,18 @@ class WeatherDetailFragment : Fragment() {
 
     var weatherDetailViewModel: WeatherDetailViewModel? = null
 
-    private var cityName: TextView? = null
     private var saveTV: TextView? = null
+    private var cityDetailsTV: TextView? = null
+    private var weatherTV: TextView? = null
+    private var temperatureTV: TextView? = null
+    private var tempMinTV: TextView? = null
+    private var tempMaxTV: TextView? = null
+    private var windTV: TextView? = null
+    private var pressureTV: TextView? = null
+    private var humidityTV: TextView? = null
+    private var sunriseTV: TextView? = null
+    private var sunsetTV: TextView? = null
+    private var lastUpdatedTV: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +76,23 @@ class WeatherDetailFragment : Fragment() {
 
     private fun initUI(view: View) {
         saveTV = view.findViewById(R.id.mark_favourite)
-        cityName = view.findViewById(R.id.city_details)
+
+        cityDetailsTV = view.findViewById(R.id.city_details)
+
+        weatherTV = view.findViewById(R.id.weather_details)
+
+        temperatureTV = view.findViewById(R.id.temparature_details)
+        tempMinTV = view.findViewById(R.id.temparature_min)
+        tempMaxTV = view.findViewById(R.id.temparature_max)
+
+        windTV = view.findViewById(R.id.wind_details)
+        pressureTV = view.findViewById(R.id.pressure)
+        humidityTV = view.findViewById(R.id.humidity)
+
+        sunriseTV = view.findViewById(R.id.sunrise)
+        sunsetTV = view.findViewById(R.id.sunset)
+
+        lastUpdatedTV = view.findViewById(R.id.last_updated)
     }
 
     private fun addObservers() {
@@ -74,16 +100,71 @@ class WeatherDetailFragment : Fragment() {
             ?.observe(viewLifecycleOwner, Observer { weatherData ->
                 weatherData?.let { data ->
                     weatherDataEntity = data
-                    cityName?.text = data.name
+                    updateUI(data)
                 }
             })
-        weatherDetailViewModel?.getFavouriteLiveData()?.observe(viewLifecycleOwner, Observer {
-            if (it == true) {
-                saveTV?.text = requireContext().getString(R.string.delete_favourite)
-            } else {
-                saveTV?.text = requireContext().getString(R.string.save_favourite)
-            }
-        })
+        weatherDetailViewModel?.getFavouriteLiveData()
+            ?.observe(viewLifecycleOwner, Observer {
+                if (it == true) {
+                    saveTV?.text = requireContext().getString(R.string.delete_favourite)
+                } else {
+                    saveTV?.text = requireContext().getString(R.string.save_favourite)
+                }
+            })
+    }
+
+    private fun updateUI(data: WeatherDataEntity) {
+        cityDetailsTV?.text = String.format(
+            getString(R.string.city_details),
+            data.name,
+            data.sys?.country,
+            data.coord?.lat,
+            data.coord?.lon
+        )
+
+        weatherTV?.text = String.format(
+            getString(R.string.weather_details),
+            data.weather?.get(0)?.main,
+            data.weather?.get(0)?.description
+        )
+        temperatureTV?.text = String.format(
+            getString(R.string.temperature_details),
+            data.main?.temp
+        )
+
+        tempMinTV?.text = String.format(
+            getString(R.string.temperature_min),
+            data.main?.temp_min
+        )
+        tempMaxTV?.text = String.format(
+            getString(R.string.temperature_min),
+            data.main?.temp_min
+        )
+        windTV?.text = String.format(
+            getString(R.string.wind_details),
+            data.wind?.speed,
+            data.wind?.deg
+        )
+        pressureTV?.text = String.format(
+            getString(R.string.pressure),
+            data.main?.pressure
+        )
+        humidityTV?.text = String.format(
+            getString(R.string.pressure),
+            data.main?.humidity
+        )
+        sunriseTV?.text = String.format(
+            getString(R.string.sunrise),
+            AppUtil.getFormattedDate(data.sys?.sunrise!!)
+        )
+        sunsetTV?.text = String.format(
+            getString(R.string.sunset),
+            AppUtil.getFormattedDate(data.sys?.sunset!!)
+        )
+        lastUpdatedTV?.text = String.format(
+            getString(R.string.last_updated),
+            AppUtil.getFormattedDate(data.dt!!)
+        )
     }
 
     override fun onResume() {
